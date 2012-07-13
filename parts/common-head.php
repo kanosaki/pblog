@@ -8,5 +8,4 @@
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-<link href="css/main.less" rel="stylesheet/less" type="text/css">
-<script src="js/less-1.3.0.min.js" type="text/javascript"></script>
+<link href="css/main.css" rel="stylesheet" type="text/css">

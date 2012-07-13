@@ -2,7 +2,27 @@
 session_start();
 require_once 'config.php';
 require_once 'url_to_absolute.php';
-require_once 'models/session.class.php';
+class Session {
+    static function create(){
+        return new Session();
+    }
+
+    function is_logined(){
+        return isset($_SESSION['user_id']);
+    }
+
+    function user_id(){
+        return $_SESSION['user_id'];
+    }
+
+    function user_name(){
+        return $_SESSION['user_name'];
+    }
+
+    function set_user_name($val){
+        $_SESSION['user_name'] = $val; 
+    }
+}    
 $GLOBALS['current_filename'] = basename($_SERVER['PHP_SELF'], ".php");
 $GLOBALS['root_prefix'] = "";
 $GLOBALS['session'] = Session::create();

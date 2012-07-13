@@ -10,7 +10,7 @@
 require 'models/post.class.php';
 if(isset($_GET['post_id'])){
     // Edit article
-    $post = new Post($_GET['post_id']);
+    $post = Post::find($_GET['post_id']);
     $editing = true;
     $first_header = "Edit article '$post->title'";
 } else {
@@ -22,7 +22,7 @@ if(isset($_GET['post_id'])){
 
 <h2 class="title-text"><?php p($first_header); ?></h2>
 <div class="edit-form">
-    <form action="actions/post.php" method="POST" class="form-horizontal">
+    <form class="form-horizontal">
         <div id="title-block" class="control-group">
             <label for="title-text" class="control-label">Title</label>
             <div class="controls">
@@ -44,7 +44,7 @@ if(isset($_GET['post_id'])){
         </div>
         <div id="submit-area" class="form-actions">
             <button id="apply-button" class="btn btn-primary">Upload</button>
-            <button class="btn btn-small">Cancel</button>
+            <button id="cancel-button" class="btn btn-small">Cancel</button>
         </div>
     </form>
 </div>
@@ -66,11 +66,14 @@ $(function(){
     $("#apply-button").click(function(){
         var data = {
             "title" : $("#title-text").val(),
-            "body"  : $("#body-text").text(),
+            "body"  : $("#body-text").val(),
             "tags"  : $("#tags-text").text()
 
         };
-        $.post("action/update-post.php", data,
+<?php if($editing){ ?>
+        data['post_id'] = "<?php echo $post->id; ?>";
+<?php } ?>
+        $.post("actions/update-post.php", data,
             function(data, status){
                 if(data['status'] == "OK"){
                     $("#success-msg").html(data['msg']);
@@ -81,5 +84,7 @@ $(function(){
                 }
             }, "json");
     });  
+    $("#apply-button").submit(function(){ return false; });
+    $("#cancel-button").submit(function(){ return false; });
 });
 </script>

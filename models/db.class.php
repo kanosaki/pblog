@@ -87,8 +87,9 @@ class DbBase {
  */
 class SQLite extends DbBase {
 	function __construct($filename, $reset_db=false) {
-        $do_init = $reset_db || !file_exists($filename);
-        $this -> conn = new PDO("sqlite:" . $filename, null, null, array(
+        $path = SQLite::db_path($filename);
+        $do_init = $reset_db || !file_exists($path);
+        $this -> conn = new PDO("sqlite:" . $path, null, null, array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ));
@@ -96,6 +97,10 @@ class SQLite extends DbBase {
             $this->init_db();
 		}
 	}
+
+    static function db_path($filename){
+        return __DIR__ . '/../' . $filename;
+    }
 
 	function init_db() {
         $sql_path = realpath(__DIR__ . '/../sqls/init_sqlite.sql');
