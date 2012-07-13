@@ -13,13 +13,17 @@ function first_or_null($vals){
  * Provides common facilities and inteface of database access.
  */
 class DbBase {
+    private static $instance = null;
 
 	function __construct() {
 
 	}
 
 	public static function open() {
-		return DbBase::open_sqlite();
+        if(self::$instance == null){
+            self::$instance = DbBase::open_sqlite();
+        }
+        return self::$instance;
 	}
 
 	public static function open_sqlite() {
