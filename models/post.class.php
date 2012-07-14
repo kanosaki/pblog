@@ -46,6 +46,10 @@ class Post {
     }
 
     function getEditLink(){
+        return "edit.php?post_id=" . $this->id;
+    }
+
+    function getLink(){
         return "show-article.php?post_id=" . $this->id;
     }
 
@@ -69,6 +73,11 @@ class Post {
         return $this->tags;
     }
 
+    function getTagsExpr(){
+        $tags = array_map(array('Tag', 'mapValue'), $this->getTags());
+        return join(", ", $tags);
+    }
+
     function setTags($tags_expr){
         $newTags = Tag::parse($tags_expr);
         $oldTags = array_map(array('Tag', 'mapValue'), $this->getTags());
@@ -77,8 +86,6 @@ class Post {
         $db = DbBase::open();
 
         if(count($deleted) > 0){
-            echo "DELETED:";
-            var_dump($deleted);
             $sql_delete = 'DELETE FROM `Post_Tag` WHERE `tag_id` = (SELECT `id` FROM `Tags` WHERE `value` = ?)';
             $stmt = $db->prepare($sql_delete, false);
             foreach($deleted as $dtag){
@@ -87,8 +94,6 @@ class Post {
         }
         
         if(count($created) > 0){
-            echo "CREATED:";
-            var_dump($created);
             Tag::update($created);
             $sql_create = 'INSERT INTO `Post_Tag`(id, post_id, tag_id) VALUES (:id, :post_id, :tag_id)';
             $stmt = $db->prepare($sql_create, false);

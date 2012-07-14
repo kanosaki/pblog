@@ -8,6 +8,7 @@ $ret = array("status" => "Failed");
 
 function edit_post(){
     global $session;
+    global $ret;
     
     $post_id = $_POST['post_id'];
     $title = $_POST['title'];
@@ -31,6 +32,7 @@ function edit_post(){
 
 function create_post(){
     global $session;
+    global $ret;
     $title = $_POST['title'];
     $body  = $_POST['body'];
     $tags = $_POST['tags'];

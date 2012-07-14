@@ -14,9 +14,8 @@ if(isset($_GET['post_id'])){
     $editing = true;
     $first_header = "Edit article '$post->title'";
 } else {
-    $post = new Post();
-    $editing = false;
-    $first_header = "Create article";
+    echo "Missing post_id";
+    exit;
 }
 ?>
 
@@ -26,25 +25,34 @@ if(isset($_GET['post_id'])){
         <div id="title-block" class="control-group">
             <label for="title-text" class="control-label">Title</label>
             <div class="controls">
-                <input type="text" name="post-text" id="title-text" style="width: 100%;" placeholder="Enter title..." value="<?php p($post->getTitle()); ?>">
+                <input  type="text" name="post-text" id="title-text" 
+                        style="width: 100%;" 
+                        placeholder="Enter title..." 
+                        value="<?php p($post->getTitle()); ?>">
             </div>
         </div>
         <hr />
         <div id="body-block" class="control-group">
-            <label for"body-text" class="control-label">Body</label>
+            <label for="body-text" class="control-label">Body</label>
             <div class="controls">
-                <textarea id="body-text" name="post-body" rows="20" style="width: 100%;" placeholder="Body"><?php p($post->getBody()) ?></textarea>
+                <textarea   id="body-text" name="post-body" 
+                            rows="20" 
+                            style="width: 100%;" 
+                            placeholder="Body"><?php p($post->getBody()) ?></textarea>
             </div>
         </div>
         <div id="body-block" class="control-group">
-            <label for"tags-text" class="control-label">Tags</label>
+            <label for="tags-text" class="control-label">Tags</label>
             <div class="controls">
-                <input type="text" name="post-tags" id="tags-text" style="width: 100%;" placeholder="Enter tags...(Splitting by Comma)" value="">
+            <input  type="text" name="post-tags" id="tags-text" 
+                    style="width: 100%;" 
+                    placeholder="Enter tags...(Splitting by Comma)" 
+                    value="<?php p($post->getTagsExpr()); ?>">
             </div>
         </div>
         <div id="submit-area" class="form-actions">
-            <button id="apply-button" class="btn btn-primary">Upload</button>
-            <button id="cancel-button" class="btn btn-small">Cancel</button>
+            <a id="apply-button" class="btn btn-primary">Upload</a>
+            <a id="cancel-button" class="btn btn-small">Cancel</a>
         </div>
     </form>
 </div>
@@ -67,7 +75,7 @@ $(function(){
         var data = {
             "title" : $("#title-text").val(),
             "body"  : $("#body-text").val(),
-            "tags"  : $("#tags-text").text()
+            "tags"  : $("#tags-text").val()
 
         };
 <?php if($editing){ ?>
@@ -84,7 +92,5 @@ $(function(){
                 }
             }, "json");
     });  
-    $("#apply-button").submit(function(){ return false; });
-    $("#cancel-button").submit(function(){ return false; });
 });
 </script>
