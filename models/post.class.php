@@ -45,6 +45,10 @@ class Post {
         return $ret;
     }
 
+    function getEditLink(){
+        return "show-article.php?post_id=" . $this->id;
+    }
+
 
     public static function find($post_id){
         $db = DbBase::open();

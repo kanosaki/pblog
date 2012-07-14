@@ -13,7 +13,7 @@ $list_mode = "Recent $count posts.";
 <?php foreach($posts as $post) { ?>
 <div class="post-wrap">
     <div class="page-header post-title">
-        <h2><?php p($post->getTitle()); ?></h2>
+	<h2><?php p($post->getTitle()); ?><a href="<?php echo $post->getEditLink(); ?>"><small>Edit</small></a></h2>
     </div>
     <div class="post-body">
     <?php p($post->getBody()); ?> 

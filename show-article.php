@@ -2,18 +2,15 @@
 require_once 'lib/common.php';
 require_once 'models/post.class.php';
 if(isset($_GET['post_id'])){
-    $posts = Post::find($_GET['post_id']);
-    if(count($posts) == 1){
-        $post = $posts[0];
+    $post = Post::find($_GET['post_id']);
+    if($post){
         $tit = $post->getTitle();
         $page_title = "Artile | $tit";
     } else {
-        $post = null;
-        $page_title = "Artile | ERROR";
+        header("Location: index.php");
     }
 } else {
-    $post = null;
-    $page_title = "Artile | ERROR";
+    header("Location: index.php");
 }
 $page_body = "parts/post.php";
 require_once "parts/default.php";
