@@ -7,10 +7,11 @@ require_once 'lib/common.php';
 //      -> Accepted | already known -> Forward index.php
 //      -> Accepted | first user    -> Enter username(user-profile.php)
 
-if($session->is_logined()){
-    header('Location: index.php');
+if(DEBUG && !$session->is_logined()){
+    $_SESSION['user_id'] = 1;
+    $_SESSION['user_name'] = 'Admin';
+    header("Location: index.php");
 }
-
 $page_title = "Login";
 require_once "parts/login.php";
 ?>

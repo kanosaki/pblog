@@ -1,6 +1,7 @@
 <?php
 require_once 'lib/common.php';
 require_once 'models/post.class.php';
+$backurl = "index.php";
 if(isset($_GET['post_id'])){
     $post = Post::find($_GET['post_id']);
     if($post){

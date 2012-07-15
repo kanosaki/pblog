@@ -1,10 +1,3 @@
-<?php
-    if(DEBUG && !$session->is_logined()){
-        $_SESSION['user_id'] = 1;
-        $_SESSION['user_name'] = 'Admin';
-        header("Location: index.php");
-    }
-?>
 <!doctype html>
 <html>
     <head>

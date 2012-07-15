@@ -1,24 +1,3 @@
-<?php 
-
-// TODO: Add form validation.
-
-// REST style
-// GET  ->  has(post_id) -> Edit
-//      -> !has(post_id) -> Create
-// POST -> Update/Create 
-
-require 'models/post.class.php';
-if(isset($_GET['post_id'])){
-    // Edit article
-    $post = Post::find($_GET['post_id']);
-    $editing = true;
-    $first_header = "Edit article '$post->title'";
-} else {
-    echo "Missing post_id";
-    exit;
-}
-?>
-
 <h2 class="title-text"><?php p($first_header); ?></h2>
 <div class="edit-form">
     <form class="form-horizontal">

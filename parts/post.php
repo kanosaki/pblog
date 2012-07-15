@@ -1,17 +1,7 @@
-<?php
-$backurl = "index.php";
-?>
-
-<?php if($post){ ?>
 <div id="article">
     <h2><?php p($post->getTitle()); ?></h2>
     <p><?php p($post->getBody()); ?></p>
 </div>
-<?php } else { ?>
-<div>
-    Missing post_id!!
-</div>
-<?php } ?>
 
 <div class="modal hide" id="alert-modal">
     <div class="modal-header">
