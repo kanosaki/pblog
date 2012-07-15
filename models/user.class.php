@@ -4,6 +4,9 @@ require_once('db.class.php');
 class User {
     public $id;
     public $name;
+    function getName(){
+        return $this->name;
+    }
 
     function __construct() {
 

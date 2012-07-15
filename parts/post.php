@@ -1,6 +1,10 @@
 <div id="article">
-    <h2><?php p($post->getTitle()); ?></h2>
+	<h1><?php p($post->getTitle()); ?> <small><?php p($post->getAuthor()->getName()); ?></small></h1>
+	<h6><?php p($post->getTagsExpr()); ?></h6>
+	<hr />
     <p><?php p($post->getBody()); ?></p>
+	<hr />
+	<a class="btn btn-info" href="<?php p($post->getEditLink())?>"><i class="icon-edit"></i> Edit</a>
 </div>
 
 <div class="modal hide" id="alert-modal">

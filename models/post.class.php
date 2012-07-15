@@ -1,6 +1,7 @@
 <?php
 require_once 'db.class.php';
 require_once 'tag.class.php';
+require_once 'user.class.php';
 /**
  *
  */
@@ -26,7 +27,15 @@ class Post {
     public $updated_at = "";
     public $tags = null;
     public $author_id = null;
+    function getAuthor(){
+        if($this->author == null){
+            $this->author = User::find($this->author_id);
+        }
+        return $this->author;
+    }
     public $id = null;
+
+    public $author = null;
 
     function __construct() {
     }
