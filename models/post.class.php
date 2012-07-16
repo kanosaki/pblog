@@ -88,12 +88,16 @@ class Post {
         return $db->create_objects('Post');
     }
 
-    static function findByTag($tag_expr){
+    static function findByTagValue($tag_expr){
         $tag = Tag::findByValue($tag_expr);
         if(!$tag) return null;
+        return Post::findByTagID($tag->id);
+    }
+
+    static function findByTagID($tag_id){
         $db = DbBase::open();
         $sql = 'SELECT * FROM `Posts` WHERE id IN (SELECT post_id FROM Post_Tag WHERE tag_id = ?)';
-        $query = $db->query($sql, array($tag->id));
+        $query = $db->query($sql, array($tag_id));
         return $db->create_objects('Post');
     }
 
@@ -107,6 +111,10 @@ class Post {
         $db = DbBase::open();
         $db->query('SELECT * FROM `Posts` ORDER BY id DESC LIMIT ?', array($count));
         return $db->create_objects('Post');
+    }
+
+    static function getListArticleLink($mode, $params){
+        return "list-article.php?mode=$mode&$params";
     }
 
     function getTags(){

@@ -5,6 +5,8 @@ $page_body = "postlist.php";
 
 require_once 'models/post.class.php';
 require_once 'models/user.class.php';
+require_once 'models/tag.class.php';
+
 if(isset($_GET['mode'])){
     $mode = $_GET['mode'];
     if($mode == "recent"){
@@ -14,6 +16,19 @@ if(isset($_GET['mode'])){
     } else if($mode == "all"){
         $posts = Post::all_posts();
         $list_mode = "All articles.";
+    } else if($mode == "tag"){
+        if(!isset($_GET['tag_id'])){
+            echo "Missing tag_id!!";
+            exit;
+        }
+        $tag = Tag::find($_GET['tag_id']);
+        if(!$tag){
+            echo "Tag not found!";
+            exit;
+        }
+        $posts = $tag->getPosts();
+        $tagname = $tag->value;
+        $list_mode = "Articles tagged $tagname";
     } else if($mode == "user"){
         if(!isset($_GET['user_id'])){
             echo "Missing user_id!!";

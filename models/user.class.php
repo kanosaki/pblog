@@ -29,6 +29,10 @@ class User {
         return Post::findByUser($this->id);
     }
 
+    function getListArticlesLink(){
+        return "list-articles.php?mode=user&user_id=" . $this->id;
+    }
+
     function apply(){
         if($this->id){
             $this->update();

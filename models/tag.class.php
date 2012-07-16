@@ -1,5 +1,6 @@
 <?php
 require_once 'db.class.php';
+require_once 'tag.class.php';
 
 class Tag {
     public $value = "";
@@ -7,7 +8,7 @@ class Tag {
     
     public static function findByPost($post_id){
         $db = DbBase::open();
-        $sql = 'SELECT value FROM TAGS WHERE id IN (SELECT tag_id from post_tag where post_id = ?)';
+        $sql = 'SELECT * FROM TAGS WHERE id IN (SELECT tag_id from post_tag where post_id = ?)';
         $query = $db->query($sql, array($post_id));
         return $db->create_objects('Tag');
     }
@@ -16,6 +17,13 @@ class Tag {
         $db = DbBase::open();
         $sql = 'SELECT * FROM TAGS WHERE `value` = ?';
         $db->query($sql, array($value));
+        return first_or_null($db->create_objects('Tag'));
+    }
+
+    static function find($tag_id){
+        $db = DbBase::open();
+        $sql = 'SELECT * FROM `Tags` WHERE `id` = ?';
+        $db->query($sql, array($tag_id));
         return first_or_null($db->create_objects('Tag'));
     }
 
@@ -39,6 +47,18 @@ class Tag {
 
     static function mapValue($tag){
         return $tag->value;
+    }
+
+    function getListArticlesLink(){
+        return "list-articles.php?mode=tag&tag_id=" . $this->id;
+    }
+
+    function getValue(){
+        return $this->value;
+    }
+
+    function getPosts(){
+        return Post::findByTagID($this->id);
     }
 }
 

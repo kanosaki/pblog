@@ -2,9 +2,13 @@
 	<h1><?php p($post->getTitle()); ?></h1>
     <dl class="dl-horizontal">
         <dt>Author</dt>
-        <dd><?php p($post->getAuthor()->getName()); ?></dd>
+        <dd><a href="<?php p($post->getAuthor()->getListArticlesLink()); ?>"><?php p($post->getAuthor()->getName()); ?></a></dd>
         <dt>Tags</dt>
-        <dd><?php p($post->getTagsExpr()); ?></dd>
+        <dd>
+        <?php foreach($post->getTags() as $tag) { ?>
+            <a href="<?php p($tag->getListArticlesLink()); ?>"><?php p($tag->getValue()); ?> </a>
+        <?php } ?>
+        </dd>
         <dt>Created</dt>
         <dd><?php p($post->getCreatedAtExpr()); ?></dd>
         <dt>Updated</dt>
