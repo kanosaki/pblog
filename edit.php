@@ -10,8 +10,9 @@ if(isset($_GET['post_id'])){
     $editing = true;
     $first_header = "Edit article '$post->title'";
 } else {
-    echo "Missing post_id";
-    exit;
+    $post = new Post();
+    $editing = false;
+    $first_header = "Create article";
 }
 
 require_once "parts/default.php";
