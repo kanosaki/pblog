@@ -16,7 +16,7 @@
 							Welcome! but this site is not available.
 						</p>
 						<p>
-							<a class="btn btn-primary btn-large" href="article.php">Learn more &raquo;</a>
+							<a class="btn btn-primary btn-large" href="list-articles.php?mode=all">All Articles &raquo;</a>
 						</p>
 					</div>
 				</div><!--/span-->

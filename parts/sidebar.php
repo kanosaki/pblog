@@ -3,7 +3,10 @@
 		<li class="nav-header">
 			Articles
 		</li>
-		<li class="active-list-articles">
+		<li class="active-all-articles">
+			<a href="list-articles.php?mode=all">All articles</a>
+		</li>
+		<li class="active-recent-articles">
 			<a href="list-articles.php?mode=recent&amp;count=10">Recent articles</a>
 		</li>
 		<li class="nav-header">

@@ -31,6 +31,14 @@ function p($str){
     echo htmlspecialchars($str);
 }
 
+function getCurrentPageID(){
+    if(isset($GLOBALS['page_id'])){
+        return $GLOBALS['page_id'];
+    } else {
+        return $GLOBALS['current_filename'];
+    }
+}
+
 function root_url($scheme='http'){
     // TODO: Use 'SERVER_NAME'
     $http_host = $_SERVER['HTTP_HOST'];

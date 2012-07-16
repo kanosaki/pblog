@@ -13,9 +13,11 @@ if(isset($_GET['mode'])){
         $count = isset($_GET['count']) ? ((int)$_GET['count']) : 10;
         $posts = Post::recent_posts($count);
         $list_mode = "Recent articles. (Max $count)";
+        $page_id = "recent-articles";
     } else if($mode == "all"){
         $posts = Post::all_posts();
         $list_mode = "All articles.";
+        $page_id = "all-articles";
     } else if($mode == "tag"){
         if(!isset($_GET['tag_id'])){
             echo "Missing tag_id!!";
@@ -29,6 +31,7 @@ if(isset($_GET['mode'])){
         $posts = $tag->getPosts();
         $tagname = $tag->value;
         $list_mode = "Articles tagged $tagname";
+        $page_id = "tag-articles";
     } else if($mode == "user"){
         if(!isset($_GET['user_id'])){
             echo "Missing user_id!!";
@@ -43,6 +46,7 @@ if(isset($_GET['mode'])){
         $posts = $user->getPosts();
         $username = $user->name;
         $list_mode = "Articles by $username";
+        $page_id = "user-articles";
     }
 } else{
     $posts = Post::all_posts();

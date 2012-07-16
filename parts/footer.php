@@ -18,7 +18,7 @@
 <script type="text/javascript">
 // Auto active 
 $(document).ready(function(){
-    $(".active-<?php echo $current_filename; ?>").addClass("active");
+    $(".active-<?php echo getCurrentPageID(); ?>").addClass("active");
 <?php if(!defined('CONFIG_LOADED')){ ?>
     $("#alert-area").text("ERROR: Config was not found!!");
 <?php } ?>
