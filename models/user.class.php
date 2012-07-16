@@ -25,6 +25,10 @@ class User {
         return first_or_null($db->create_objects('User'));
     }
 
+    function getPosts(){
+        return Post::findByUser($this->id);
+    }
+
     function apply(){
         if($this->id){
             $this->update();

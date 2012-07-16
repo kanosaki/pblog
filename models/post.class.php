@@ -62,6 +62,19 @@ class Post {
         return "show-article.php?post_id=" . $this->id;
     }
 
+    function getCreatedAtExpr(){
+        return Post::getTimeStampExpr($this->created_at);
+    }
+
+    function getUpdatedAtExpr(){
+        return Post::getTimeStampExpr($this->updated_at);
+    }
+
+    static function getTimeStampExpr($time){
+        return date("Y/m/d H:i:s", (int)$time);
+
+    }
+
 
     public static function find($post_id){
         $db = DbBase::open();
@@ -84,6 +97,11 @@ class Post {
         return $db->create_objects('Post');
     }
 
+    static function all_posts(){
+        $db = DbBase::open();
+        $db->query('SELECT * From `Posts` ORDER BY id DESC');
+        return $db->create_objects('Post');
+    }
 
     public static function recent_posts($count){
         $db = DbBase::open();

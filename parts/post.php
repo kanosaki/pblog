@@ -1,6 +1,15 @@
 <div id="article">
-	<h1><?php p($post->getTitle()); ?> <small><?php p($post->getAuthor()->getName()); ?></small></h1>
-	<h6><?php p($post->getTagsExpr()); ?></h6>
+	<h1><?php p($post->getTitle()); ?></h1>
+    <dl class="dl-horizontal">
+        <dt>Author</dt>
+        <dd><?php p($post->getAuthor()->getName()); ?></dd>
+        <dt>Tags</dt>
+        <dd><?php p($post->getTagsExpr()); ?></dd>
+        <dt>Created</dt>
+        <dd><?php p($post->getCreatedAtExpr()); ?></dd>
+        <dt>Updated</dt>
+        <dd><?php p($post->getUpdatedAtExpr()); ?></dd>
+    </dl>
 	<hr />
     <p><?php p($post->getBody()); ?></p>
 	<hr />
