@@ -68,6 +68,22 @@ class Post {
         $db->query('SELECT * From Posts WHERE id = ?', array($post_id));
         return first_or_null($db->create_objects('Post'));
     }
+    
+    static function findByUser($user_id){
+        $db = DbBase::open();
+        $db->query('SELECT * FROM `Posts` WHERE author_id = ?', array($user_id));
+        return $db->create_objects('Post');
+    }
+
+    static function findByTag($tag_expr){
+        $tag = Tag::findByValue($tag_expr);
+        if(!$tag) return null;
+        $db = DbBase::open();
+        $sql = 'SELECT * FROM `Posts` WHERE id IN (SELECT post_id FROM Post_Tag WHERE tag_id = ?)';
+        $query = $db->query($sql, array($tag->id));
+        return $db->create_objects('Post');
+    }
+
 
     public static function recent_posts($count){
         $db = DbBase::open();
