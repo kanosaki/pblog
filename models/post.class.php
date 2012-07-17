@@ -54,6 +54,12 @@ class Post {
         return $ret;
     }
 
+    function delete(){
+        $db = DbBase::open();
+        $sql = "DELETE FROM `Posts` WHERE `id` = ?";
+        $db->execute($sql, array($this->id));
+    }
+
     function getEditLink(){
         return "edit.php?post_id=" . $this->id;
     }
