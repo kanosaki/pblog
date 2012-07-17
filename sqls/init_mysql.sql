@@ -13,7 +13,7 @@ CREATE TABLE `Tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `value` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Value` (`Value`)
+  UNIQUE KEY `Value` (`value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Post_Tag` (
@@ -21,8 +21,8 @@ CREATE TABLE `Post_Tag` (
   `post_id` int(11) unsigned NOT NULL,
   `tag_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `PostID` (`PostID`),
-  KEY `TagID` (`TagID`)
+  KEY `PostID` (`post_id`),
+  KEY `TagID` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Users` (

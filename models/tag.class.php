@@ -8,14 +8,14 @@ class Tag {
     
     public static function findByPost($post_id){
         $db = DbBase::open();
-        $sql = 'SELECT * FROM TAGS WHERE id IN (SELECT tag_id from post_tag where post_id = ?)';
+        $sql = 'SELECT * FROM Tags WHERE id IN (SELECT tag_id from post_tag where post_id = ?)';
         $query = $db->query($sql, array($post_id));
         return $db->create_objects('Tag');
     }
 
     static function findByValue($value){
         $db = DbBase::open();
-        $sql = 'SELECT * FROM TAGS WHERE `value` = ?';
+        $sql = 'SELECT * FROM Tags WHERE `value` = ?';
         $db->query($sql, array($value));
         return first_or_null($db->create_objects('Tag'));
     }

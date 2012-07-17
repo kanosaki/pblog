@@ -128,7 +128,6 @@ class SQLite extends DbBase {
 class MySQL extends DbBase {
 	function __construct($host, $port, $user, $pass, $dbname) {
         $this -> conn = new PDO(sprintf("mysql:host=%s;port=%d;dbname=%s", $host, $port, $dbname), $user, $pass, array(
-            PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ));
 	}

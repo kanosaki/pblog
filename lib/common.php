@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'json_encode.php';
 require_once 'url_to_absolute.php';
 class Session {
     static function create(){

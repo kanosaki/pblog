@@ -157,7 +157,8 @@ class Post {
             $tag_stmt = $db->prepare('SELECT `id` FROM `Tags` WHERE `value` = ?', false);
             foreach($created as $ctag){
                 $tag_stmt->execute(array($ctag));
-                $res = $tag_stmt->fetchAll()[0];
+                $resall = $tag_stmt->fetchAll();
+                $res = $resall[0];
                 $args = array(
                     "id"        => null,
                     "post_id"   => $this->id,
