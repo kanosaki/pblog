@@ -21,7 +21,11 @@ class DbBase {
 
 	public static function open() {
         if(self::$instance == null){
-            self::$instance = DbBase::open_sqlite();
+            if(USE_SQLITE){
+                self::$instance = DbBase::open_sqlite();
+            } else {
+                self::$instance = DbBase::open_mysql();
+            }
         }
         return self::$instance;
 	}
@@ -31,7 +35,12 @@ class DbBase {
 	}
 
 	public static function open_mysql() {
-
+        return new MySQL(
+            MYSQL_HOST,
+            MYSQL_PORT,
+            MYSQL_DBUSER,
+            trim(file_get_contents(MYSQL_DBPASS_FILE)),
+            MYSQL_DB);
 	}
 
 	public function query($sql, $ary=null) {
