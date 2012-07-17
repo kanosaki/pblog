@@ -1,4 +1,3 @@
-
 CREATE TABLE `Posts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
@@ -6,8 +5,9 @@ CREATE TABLE `Posts` (
   `created_at` int(11) unsigned NOT NULL,
   `updated_at` int(11) unsigned NOT NULL,
   `author_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_Post_Tags` FOREIGN KEY (`id`) REFERENCES `Post_Tag` (`post_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

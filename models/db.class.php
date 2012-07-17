@@ -87,7 +87,12 @@ class DbBase {
             return $stmt->execute($args);
         else
             return $stmt->execute();
+        $this->commit();
 	}
+
+    function commit(){
+        $this->conn->commit();
+    }
 
     function lastInsertId(){
         return $this->conn->lastInsertId();
@@ -102,17 +107,19 @@ class SQLite extends DbBase {
 	function __construct($filename, $reset_db=false) {
         $path = SQLite::db_path($filename);
         $do_init = $reset_db || !file_exists($path);
-        $this -> conn = new PDO("sqlite:" . $path, null, null, array(
+        $this -> conn = new PDO("sqlite://" . $path, null, null, array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ));
 		if ($do_init) {
             $this->init_db();
 		}
+        // Enable foreign key restriction.
+        $this->conn->exec("PRAGMA foreign_keys = ON");
 	}
 
     static function db_path($filename){
-        return __DIR__ . '/../' . $filename;
+        return realpath(__DIR__) . '/../' . $filename;
     }
 
 	function init_db() {

@@ -1,4 +1,6 @@
 
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE `Posts` (
   `id` INTEGER,
   `title` text NOT NULL,
@@ -20,6 +22,7 @@ CREATE TABLE `Post_Tag` (
   `id` INTEGER,
   `post_id` int(11)  NOT NULL,
   `tag_id` int(11)  NOT NULL,
+  FOREIGN KEY(`post_id`) REFERENCES `Posts`(`id`) ON DELETE CASCADE,
   PRIMARY KEY (`id`, `post_id`, `tag_id`)
 );
 
