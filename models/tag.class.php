@@ -8,7 +8,7 @@ class Tag {
     
     public static function findByPost($post_id){
         $db = DbBase::open();
-        $sql = 'SELECT * FROM Tags WHERE id IN (SELECT tag_id from post_tag where post_id = ?)';
+        $sql = 'SELECT * FROM Tags WHERE id IN (SELECT tag_id from Post_Tag where post_id = ?)';
         $query = $db->query($sql, array($post_id));
         return $db->create_objects('Tag');
     }

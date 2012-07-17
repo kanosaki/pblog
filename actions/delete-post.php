@@ -1,5 +1,6 @@
 <?php
 
+require_once '../lib/common.php';
 require_once '../models/post.class.php';
 
 $ret = array("status" => "Failed");

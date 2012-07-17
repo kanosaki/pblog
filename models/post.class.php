@@ -43,8 +43,7 @@ class Post {
     public static function create($author_id, $title, $body)
     {
         $ret = new Post();
-        $datetime = new DateTime();
-        $now = $datetime->getTimestamp();
+        $now = time();
         $ret->author_id = $author_id;
         $ret->body = $body;
         $ret->title = $title;
