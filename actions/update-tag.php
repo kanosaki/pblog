@@ -2,6 +2,7 @@
 
 require_once '../lib/common.php';
 require_once '../models/post.class.php';
+header('Content-type', 'application/json; charset=utf-8');
 $ret = array(
     "status" => "Failed"
 );

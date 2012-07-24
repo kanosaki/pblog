@@ -1,6 +1,7 @@
 <?php
 
 require_once '../lib/common.php';
+header('Content-type', 'application/json; charset=utf-8');
 $ret = array(
     "status" => "Failed"
 );

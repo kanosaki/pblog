@@ -39,6 +39,7 @@ class Session {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
     }
+
     function signup($name, $pass){
         $user = User::create($name, $pass);
         $user->apply();

@@ -3,24 +3,21 @@
         <div class="container-fluid">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
             <a class="brand" href="#">P-Blog</a>
-<?php if($session->is_logined()){ ?>
-            <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <?php echo $session->user_name(); ?> <span class="caret"></span> </a>
+            <div id="login-user" class="btn-group pull-right">
+            <a  class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <span id="login-username"></span> <span class="caret"></span> </a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#">Profile</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#">Sign Out</a>
+                        <a id="signout-link">Sign Out</a>
                     </li>
                 </ul>
             </div>
-<?php } else { ?>
-            <div class="pull-right">
-                <a href="login.php" class="btn">Login</a>
+            <div id="login-guest" class="pull-right">
+                <a id="login-button" class="btn">Login</a>
             </div>            
-<?php } ?>
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="active-index">
@@ -37,3 +34,36 @@
         </div>
     </div>
 </div>
+<div id="login-form-wrap"></div>
+<script type="text/javascript">
+$(function(){
+    var username = <?php echo ($session->is_logined()) ? '"' . ($session->user_name()) . '"' : "null" ?>;
+    window.update_login_info = function(name){
+        if(name != null){
+            $("#login-user").show();
+            $("#login-guest").hide();
+            $("#login-username").text(name);
+        }else{
+            $("#login-user").hide();
+            $("#login-guest").show();
+        }
+    };
+    
+    $("#login-button").click(function(){
+        $.get("forms/login-modal.php", function(data, status){
+            $("#login-form-wrap").append(data);
+            $("#login-form-wrap > div").modal();
+        });
+    });    
+
+    $("#signout-link").click(function(){
+        $.post("actions/sign-out.php", function(data, status){
+            if(data.status === "OK"){
+                alert("Successfully logged out");
+            }
+            location = "index.php";
+        });
+    });
+    window.update_login_info(username);
+});
+</script>

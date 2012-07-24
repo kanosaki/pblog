@@ -3,7 +3,7 @@
         <h3>Login</h3>
     </div>
     <div class="modal-footer">
-        <a class="btn btn-primary" id="login-button">Log in</a>
+        <a class="btn btn-primary" id="login-form-login-button">Log in</a>
         <a class="btn" id="signup-button">Sign up</a>
     </div>
     <div class="modal hide fade" id="input-modal">
@@ -95,11 +95,14 @@ $(function(){
     
     };
 
-    var hide_all = function(){
+    var close_form = function(){
         $("#result-modal").modal('hide');
         $("#input-modal").modal('hide');
         $("#wrap-modal").modal('hide');
         $('body').trigger("pblog-logined");
+        if(window.update_login_info){
+            window.update_login_info(get_values()["username"]);
+        }
     };
 
     var signup = function(){
@@ -144,7 +147,7 @@ $(function(){
         $("#input-modal").modal();
     };
 
-    $("#login-button").click(state_login);
+    $("#login-form-login-button").click(state_login);
     $("#signup-button").click(state_signup);
     $("#input-cancel-button").click(function(){
         $("#input-modal").modal('hide');
@@ -163,7 +166,7 @@ $(function(){
 
     $("#result-ok-button").click(function(){
         if(stat === "completed"){
-            hide_all();
+            close_form();
         } else {
             $("#result-modal").modal('hide');
         }
