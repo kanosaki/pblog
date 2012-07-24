@@ -81,7 +81,7 @@ $(function(){
     };
 
     var check_username = function(){
-        $.get("actions/check-username.php", get_values(), function(data, status){
+        $.post("actions/check-username.php", get_values(), function(data, status){
             if(data['found']){
                 $("#username-block").removeClass("success");
                 $("#username-block").addClass("error");

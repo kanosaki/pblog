@@ -7,8 +7,8 @@ header('Content-type', 'application/json; charset=utf-8');
 
 $ret = array();
 
-if(isset($_GET['username'])){
-    $username = $_GET['username'];
+if(isset($_POST['username'])){
+    $username = $_POST['username'];
     $user = User::findByName($username);
     if($user != null){
         $ret['found'] = 1;
