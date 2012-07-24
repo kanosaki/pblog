@@ -119,7 +119,7 @@ class SQLite extends DbBase {
 	}
 
     static function db_path($filename){
-        return realpath(__DIR__) . '/../' . $filename;
+        return realpath(__DIR__ . '/..') . '/' . $filename;
     }
 
 	function init_db() {

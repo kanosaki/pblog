@@ -29,8 +29,9 @@ CREATE TABLE `Post_Tag` (
 CREATE TABLE `Users` (
   `id` INTEGER,
   `name` varchar(50) NOT NULL DEFAULT '',
+  `pass` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE (`name`)
 );
 
-INSERT INTO `Users`(`id`, `name`) VALUES (1, "Admin");
+INSERT INTO `Users`(`id`, `name`, `pass`) VALUES (1, "Admin", "f52a2f759824686540c990b76d164077");

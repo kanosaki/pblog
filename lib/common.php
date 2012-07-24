@@ -1,8 +1,10 @@
 <?php
 session_start();
+set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . '/..'));
 require_once 'config.php';
 require_once 'json_encode.php';
 require_once 'url_to_absolute.php';
+require_once 'models/user.class.php';
 class Session {
     static function create(){
         return new Session();
@@ -23,6 +25,30 @@ class Session {
     function set_user_name($val){
         $_SESSION['user_name'] = $val; 
     }
+
+    function login($name, $pass){
+        $user = User::auth($name, $pass);
+        if($user){
+            $_SESSION['user_id'] =  $user->id;
+            $_SESSION['user_name'] = $user->name;
+        }
+        return $user;
+    }
+    
+    function logout(){
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_name']);
+    }
+    function signup($name, $pass){
+        $user = User::create($name, $pass);
+        $user->apply();
+        if($user){
+            $_SESSION['user_id'] =  $user->id;
+            $_SESSION['user_name'] = $user->name;
+        }
+        return $user;
+    }
+
 }    
 $GLOBALS['current_filename'] = basename($_SERVER['PHP_SELF'], ".php");
 $GLOBALS['root_prefix'] = "";
