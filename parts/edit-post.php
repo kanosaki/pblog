@@ -50,6 +50,13 @@
 
 <script type="text/javascript">
 $(function(){
+    if (window.userinfo_updated) {
+        window.userinfo_updated.bind(function(name){
+            if(name == ""){
+                window.location = "index.php"; 
+            }
+        });
+    }
     $("#apply-button").click(function(){
         var data = {
             "title" : $("#title-text").val(),

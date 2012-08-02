@@ -37,9 +37,11 @@
 <div id="login-form-wrap"></div>
 <script type="text/javascript">
 $(function(){
+    var login_pending = false;
     var username = <?php echo ($session->is_logined()) ? '"' . ($session->user_name()) . '"' : "null" ?>;
     window.userinfo_updated = new pblog.Event();
     window.userinfo_updated.bind(function(name){
+        login_pending = false;
         if(name != null){
             $("#login-user").show();
             $("#login-guest").hide();
@@ -51,6 +53,8 @@ $(function(){
     });
     
     $("#login-button").click(function(){
+        if(login_pending) return;
+        login_pending = true;
         $.get("forms/login-modal.php", function(data, status){
             $("#login-form-wrap").append(data);
             $("#login-form-wrap > div").modal();
