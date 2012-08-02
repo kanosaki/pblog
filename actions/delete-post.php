@@ -9,6 +9,9 @@ $ret = array("status" => "Failed");
 if(isset($_POST['post_id'])){
     $post = Post::find($_POST['post_id']);
     if($post){
+        if($post->author_id != $session->user_id()){
+            abort_with_message("You have no permission to edit this post");
+        }
         $post->delete(); 
         $ret['message'] = "Successfully deleted!";
         $ret['status'] = 'OK';

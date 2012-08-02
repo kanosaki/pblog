@@ -38,7 +38,8 @@
 <script type="text/javascript">
 $(function(){
     var username = <?php echo ($session->is_logined()) ? '"' . ($session->user_name()) . '"' : "null" ?>;
-    window.update_login_info = function(name){
+    window.userinfo_updated = new pblog.Event();
+    window.userinfo_updated.bind(function(name){
         if(name != null){
             $("#login-user").show();
             $("#login-guest").hide();
@@ -47,7 +48,7 @@ $(function(){
             $("#login-user").hide();
             $("#login-guest").show();
         }
-    };
+    });
     
     $("#login-button").click(function(){
         $.get("forms/login-modal.php", function(data, status){
@@ -64,6 +65,6 @@ $(function(){
             location = "index.php";
         });
     });
-    window.update_login_info(username);
+    window.userinfo_updated.trigger(username);
 });
 </script>

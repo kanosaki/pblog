@@ -100,8 +100,8 @@ $(function(){
         $("#input-modal").modal('hide');
         $("#wrap-modal").modal('hide');
         $('body').trigger("pblog-logined");
-        if(window.update_login_info){
-            window.update_login_info(get_values()["username"]);
+        if(window.userinfo_updated){
+            window.userinfo_updated.trigger(get_values()["username"]);
         }
     };
 

@@ -55,6 +55,12 @@ $GLOBALS['current_filename'] = basename($_SERVER['PHP_SELF'], ".php");
 $GLOBALS['root_prefix'] = "";
 $GLOBALS['session'] = Session::create();
 
+function abort_with_message($msg){
+  header("Content-type: text/plain");
+  echo $msg;
+  exit;
+}
+
 function p($str){
     echo htmlspecialchars($str);
 }
