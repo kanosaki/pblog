@@ -2,6 +2,17 @@
 require_once 'db.class.php';
 require_once 'tag.class.php';
 require_once 'user.class.php';
+require_once 'lib/markdown.php';
+
+$markdown_converter = new Markdown_Parser;
+$markdown_converter->no_markup = true;
+$markdown_converter->no_entities = true;
+
+function convert_markdown($text){
+    global $markdown_converter;
+    return $markdown_converter->transform($text); 
+}
+
 /**
  *
  */
@@ -14,9 +25,16 @@ class Post {
         'updated_at' => 'updated_at',
         'author_id' => 'author_id',
     );
+    private $rendered_html = "";
 
     public $body = "";
     function getBody(){
+        if(!$this->rendered_html){
+            $this->rendered_html = convert_markdown($this->body);
+        }
+        return $this->rendered_html;
+    }
+    function getRawBody(){
         return $this->body;
     }
     public $title = "";

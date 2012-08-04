@@ -15,7 +15,7 @@
         <dd><?php p($post->getUpdatedAtExpr()); ?></dd>
     </dl>
 	<hr />
-    <p><?php p($post->getBody()); ?></p>
+    <?php echo $post->getBody(); ?>
 	<hr />
 	<a class="btn btn-info" href="<?php p($post->getEditLink())?>"><i class="icon-edit"></i> Edit</a>
 	<a class="btn btn-danger" id="delete-button"><i class="icon-remove"></i> Delete</a>

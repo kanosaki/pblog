@@ -17,7 +17,7 @@
                 <textarea   id="body-text" name="post-body" 
                             rows="20" 
                             style="width: 100%;" 
-                            placeholder="Body"><?php p($post->getBody()) ?></textarea>
+                            placeholder="Body"><?php p($post->getRawBody()) ?></textarea>
             </div>
         </div>
         <div id="body-block" class="control-group">
