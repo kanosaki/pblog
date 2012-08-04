@@ -6,7 +6,7 @@
 	<h2><a href="<?php p($post->getLink()); ?>"><?php p($post->getTitle()); ?></a> <a href="<?php echo $post->getEditLink(); ?>"><small>Edit</small></a></h2>
     </div>
     <div class="post-body">
-    <?php p($post->getBody()); ?> 
+    <?php echo($post->getBodyText()); ?> 
     </div>
 </div>
 
